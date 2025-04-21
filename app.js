@@ -1,4 +1,4 @@
-document.getElementById('btn1').addEventListener('click', () => {
+document.getElementById('btn1').addEventListener('click', async () => {  // Added async here
   const resultEl = document.getElementById('result1');
   const statusEl = document.getElementById('status1');
   resultEl.classList.remove('hidden');
@@ -24,12 +24,17 @@ document.getElementById('btn2').addEventListener('click', () => {
   resultEl.classList.remove('hidden');
 
   fetch('cryptonight.wasm')
-    .then(() => {
-      statusEl.textContent = '✅ Loaded (NOT BLOCKED)';
-      statusEl.className = 'status allowed';
+    .then((response) => {
+      if (response.ok) {
+        statusEl.textContent = '✅ Loaded (NOT BLOCKED)';
+        statusEl.className = 'status allowed';
+      } else {
+        statusEl.textContent = '❌ Blocked by server';
+        statusEl.className = 'status blocked';
+      }
     })
     .catch((e) => {
-      statusEl.textContent = '❌ Blocked by extension';
+      statusEl.textContent = `❌ Error: ${e.message}`;
       statusEl.className = 'status blocked';
     });
 });
