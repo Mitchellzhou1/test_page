@@ -1,0 +1,94 @@
+:root {
+  --primary: #6c5ce7;
+  --secondary: #a29bfe;
+  --dark: #2d3436;
+  --light: #f5f6fa;
+  --danger: #ff7675;
+  --success: #55efc4;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h1 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+p.subtitle {
+  color: var(--dark);
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: var(--danger);
+}
+
+.btn-success {
+  background: var(--success);
+  color: var(--dark);
+}
+
+.result {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  font-family: monospace;
+}
+
+.hidden {
+  display: none;
+}
+
+.status {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.blocked {
+  color: var(--danger);
+}
+
+.allowed {
+  color: var(--success);
+}
