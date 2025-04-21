@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mining Blocker Test (Educational)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔒 Mining Blocker Test</h1>
+    <p class="subtitle">
+      This is an <strong>educational demo</strong> to test if your extension blocks mining resources.
+    </p>
+
+    <button id="btn1" class="btn">Load Mining Script (Webminepool)</button>
+    <button id="btn2" class="btn btn-danger">Load WASM Miner (Cryptonight)</button>
+    <button id="btn3" class="btn btn-success">Connect to WebSocket Miner</button>
+
+    <div id="result1" class="result hidden">
+      <p>Attempted to load: <code>https://www.webminepool.com/lib/base.js</code></p>
+      <p class="status" id="status1"></p>
+    </div>
+
+    <div id="result2" class="result hidden">
+      <p>Attempted to load: <code>https://localhost/cryptonight.wasm</code></p>
+      <p class="status" id="status2"></p>
+    </div>
+
+    <div id="result3" class="result hidden">
+      <p>Attempted WebSocket: <code>wss://coinwebmining.com/socket</code></p>
+      <p class="status" id="status3"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
