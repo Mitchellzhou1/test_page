@@ -11,7 +11,7 @@ document.getElementById('btn1').addEventListener('click', () => {
       statusEl.className = 'status allowed';
     };
     script.onerror = () => {
-      statusEl.textContent = '❌ Blocked by extension/filter';
+      statusEl.textContent = '❌ Blocked by extension';
       statusEl.className = 'status blocked';
     };
     document.head.appendChild(script);
@@ -26,35 +26,13 @@ document.getElementById('btn2').addEventListener('click', () => {
   const statusEl = document.getElementById('status2');
   resultEl.classList.remove('hidden');
 
-  fetch('https://localhost/cryptonight.wasm')
+  fetch('/cryptonight.wasm')
     .then(() => {
       statusEl.textContent = '✅ Loaded (NOT BLOCKED)';
       statusEl.className = 'status allowed';
     })
     .catch((e) => {
-      statusEl.textContent = '❌ Blocked by extension/filter';
+      statusEl.textContent = '❌ Blocked by extension';
       statusEl.className = 'status blocked';
     });
-});
-
-document.getElementById('btn3').addEventListener('click', () => {
-  const resultEl = document.getElementById('result3');
-  const statusEl = document.getElementById('status3');
-  resultEl.classList.remove('hidden');
-
-  try {
-    const socket = new WebSocket('wss://coinwebmining.com/socket');
-    socket.onopen = () => {
-      statusEl.textContent = '✅ Connected (NOT BLOCKED)';
-      statusEl.className = 'status allowed';
-      socket.close();
-    };
-    socket.onerror = () => {
-      statusEl.textContent = '❌ Blocked by extension/filter';
-      statusEl.className = 'status blocked';
-    };
-  } catch (e) {
-    statusEl.textContent = `❌ Error: ${e.message}`;
-    statusEl.className = 'status blocked';
-  }
 });
