@@ -4,17 +4,14 @@ document.getElementById('btn1').addEventListener('click', () => {
   resultEl.classList.remove('hidden');
 
   try {
-    const script = document.createElement('script');
-    script.src = 'https://www.webminepool.com/lib/base.js';
-    script.onload = () => {
+    const response = await fetch('https://www.webminepool.com/lib/base.js');
+    if (response.ok) {
       statusEl.textContent = '✅ Loaded (NOT BLOCKED)';
       statusEl.className = 'status allowed';
-    };
-    script.onerror = () => {
-      statusEl.textContent = '❌ Blocked by extension';
+    } else {
+      statusEl.textContent = '❌ Blocked by server';
       statusEl.className = 'status blocked';
-    };
-    // document.head.appendChild(script);
+    }
   } catch (e) {
     statusEl.textContent = `❌ Error: ${e.message}`;
     statusEl.className = 'status blocked';
@@ -26,7 +23,7 @@ document.getElementById('btn2').addEventListener('click', () => {
   const statusEl = document.getElementById('status2');
   resultEl.classList.remove('hidden');
 
-  fetch('/cryptonight.wasm')
+  fetch('cryptonight.wasm')
     .then(() => {
       statusEl.textContent = '✅ Loaded (NOT BLOCKED)';
       statusEl.className = 'status allowed';
