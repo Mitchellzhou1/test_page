@@ -14,7 +14,7 @@ document.getElementById('btn1').addEventListener('click', () => {
       statusEl.textContent = '❌ Blocked by extension';
       statusEl.className = 'status blocked';
     };
-    document.head.appendChild(script);
+    // document.head.appendChild(script);
   } catch (e) {
     statusEl.textContent = `❌ Error: ${e.message}`;
     statusEl.className = 'status blocked';
