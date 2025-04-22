@@ -7,17 +7,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  
   <div class="container">
+    <img src="media/logo.png">
     <h1>🔒 Mining Blocker Test</h1>
     <p class="subtitle">
       This is an <strong>educational demo</strong> to test if your extension blocks mining resources.
     </p>
 
+
+    <h3 class="section-title">Network Based Detection</h3>
     <button id="btn1" class="btn">Load Mining Script (Webminepool)</button>
     <button id="btn2" class="btn btn-danger">Load WASM Miner (Cryptonight)</button>
+    
+    <div class="section-divider"></div>
+    <h3 class="section-title">Resource Based Detection</h3>
+
     <button id="btn3" class="btn btn-blue">Invisible Miner Iframe</button>
     <div class="warning">
-      <p><strong>⚠️ Disclaimer:</strong> This test simulates extremely high CPU usage for <strong>10 seconds</strong>. Your browser may become unresponsive or freeze temporarily. Only run this if you're ready.</p>
+      <p><strong>⚠️ Disclaimer:</strong> This test simulates extremely high CPU usage for <strong>10 seconds</strong>. Your browser may become unresponsive or freeze temporarily.</p>
     </div>
     
     <button id="btn4" class="btn btn-warning">💥 Resource Usage Simulator</button>
