@@ -52,7 +52,7 @@ document.getElementById("btn3").addEventListener("click", () => {
 });
 
 document.getElementById("btn4").addEventListener("click", () => {
-  const worker = new Worker("regularCalculations.js");
+  const worker = new Worker("resource_exhaustion/regularCalculations.js");
   worker.postMessage(30000);
   document.getElementById("result4").classList.remove("hidden");
 });
