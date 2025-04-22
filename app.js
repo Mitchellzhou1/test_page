@@ -69,11 +69,11 @@ document.getElementById('btn4').addEventListener('click', () => {
   domWorker.onmessage = (e) => console.log(e.data);
 
   // Send start signal to workers
-  cpuWorker.postMessage();
-  memoryWorker.postMessage();
-  canvasWorker.postMessage();
-  networkWorker.postMessage();
-  domWorker.postMessage();
+  cpuWorker.postMessage({});
+  memoryWorker.postMessage({});
+  canvasWorker.postMessage({});
+  networkWorker.postMessage({});
+  domWorker.postMessage({});
 
   // Handle simulation completion
   setTimeout(() => {
