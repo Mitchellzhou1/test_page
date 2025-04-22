@@ -52,36 +52,50 @@ document.getElementById("btn3").addEventListener("click", () => {
 });
 
 document.getElementById("btn4").addEventListener("click", () => {
+  const resultEl = document.getElementById("result4");
+  const statusEl = document.getElementById("status4");
+  resultEl.classList.remove("hidden");
+
+  statusEl.textContent = "⏳ Simulating NORMAL usage (primes)...";
+  statusEl.className = "status pending";
+
   const worker = new Worker("resource_exhaustion/regularCalculations.js");
   worker.postMessage(30000);
-  document.getElementById("result4").classList.remove("hidden");
+
+  worker.onmessage = (e) => {
+    statusEl.textContent = `✅ Completed: ${e.data}`;
+    statusEl.className = "status allowed";
+  };
 });
 
-
 document.getElementById('btn5').addEventListener('click', () => {
+  const resultEl = document.getElementById("result5");
+  const statusEl = document.getElementById("status5");
+  resultEl.classList.remove("hidden");
+
   alert("⚠️ Resource usage simulation starting. This will run for 10 seconds and may freeze or crash your browser tab!");
+
+  statusEl.textContent = "⏳ Running INTENSE resource usage simulation...";
+  statusEl.className = "status pending";
 
   const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
   const memoryWorker = new Worker('resource_exhaustion/memoryWorker.js');
   const networkWorker = new Worker('resource_exhaustion/networkWorker.js');
 
-  // Start workers and listen for completion
-  cpuWorker.onmessage = (e) => console.log(e.data);
-  memoryWorker.onmessage = (e) => console.log(e.data);
-  networkWorker.onmessage = (e) => console.log(e.data);
+  cpuWorker.onmessage = (e) => console.log("CPU:", e.data);
+  memoryWorker.onmessage = (e) => console.log("Memory:", e.data);
+  networkWorker.onmessage = (e) => console.log("Network:", e.data);
 
-  // Send start signal to workers
   cpuWorker.postMessage({});
   memoryWorker.postMessage({});
   networkWorker.postMessage({});
 
-  // Handle simulation completion
   setTimeout(() => {
-    alert("✅ Resource simulation complete.");
-  }, 200000 + 10000);
-  document.getElementById("result5").classList.remove("hidden");
-
+    statusEl.textContent = "✅ INTENSE simulation complete.";
+    statusEl.className = "status allowed";
+  }, 10000);
 });
+
 
 
 
