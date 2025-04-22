@@ -56,21 +56,36 @@ document.getElementById('btn4').addEventListener('click', () => {
   const result = document.getElementById('result4');
   const status = document.getElementById('status4');
   result.classList.remove('hidden');
-  status.textContent = 'Running extremely high CPU load...';
+  status.textContent = 'Running full resource attack...';
 
-  const endTime = Date.now() + 10000;
+  const endTime = Date.now() + 15000;
+  const memoryHog = [];
 
-  // Aggressive CPU burn: nested loops and pointless heavy math
-  while (Date.now() < endTime) {
-    for (let i = 0; i < 5000; i++) {
-      for (let j = 0; j < 5000; j++) {
-        Math.hypot(i * Math.random(), j * Math.random());
-        const arr = new Array(1000).fill(0).map(() => Math.random() * Math.random());
-        arr.sort(() => Math.random() - 0.5); // extra load
+  // Simulate full resource attack
+  function burnEverything() {
+    while (Date.now() < endTime) {
+      // CPU: Massive nested loops with pointless math
+      for (let i = 0; i < 5000; i++) {
+        for (let j = 0; j < 5000; j++) {
+          Math.atan2(i, j);
+          Math.pow(i, j % 10);
+        }
+      }
+
+      const bigArray = new Array(1e6).fill(Math.random());
+      memoryHog.push(bigArray);
+
+      for (let k = 0; k < 10; k++) {
+        fetch("crypto_mining_domain.com")
+          .then(() => {})
+          .catch(() => {});
       }
     }
+
+    status.textContent = '💀 Test complete. If you’re still alive, congrats.';
   }
 
-  status.textContent = 'Test complete. Your browser survived!';
+  burnEverything();
 });
+
 
