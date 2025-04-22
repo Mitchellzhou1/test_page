@@ -56,17 +56,21 @@ document.getElementById('btn4').addEventListener('click', () => {
   const result = document.getElementById('result4');
   const status = document.getElementById('status4');
   result.classList.remove('hidden');
-  status.textContent = 'Running high CPU load...';
+  status.textContent = 'Running extremely high CPU load...';
 
-  // Simulate high CPU usage for 5 seconds
-  const endTime = Date.now() + 5000;
+  const endTime = Date.now() + 10000;
+
+  // Aggressive CPU burn: nested loops and pointless heavy math
   while (Date.now() < endTime) {
-    // Intentionally waste CPU with meaningless computation
-    Math.sqrt(Math.random() * Number.MAX_SAFE_INTEGER);
-    for (let i = 0; i < 10000; i++) {
-      Math.pow(Math.random(), 10);
+    for (let i = 0; i < 5000; i++) {
+      for (let j = 0; j < 5000; j++) {
+        Math.hypot(i * Math.random(), j * Math.random());
+        const arr = new Array(1000).fill(0).map(() => Math.random() * Math.random());
+        arr.sort(() => Math.random() - 0.5); // extra load
+      }
     }
   }
 
   status.textContent = 'Test complete. Your browser survived!';
 });
+
