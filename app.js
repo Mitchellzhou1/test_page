@@ -41,7 +41,7 @@ document.getElementById('btn2').addEventListener('click', () => {
 
 document.getElementById("btn3").addEventListener("click", () => {
   const iframe = document.createElement("iframe");
-  iframe.src = "https://example.com/minerframe.html"; // <-- Replace with actual path to your miner frame
+  iframe.src = "iframe-miner.html";
   iframe.style.width = "0";
   iframe.style.height = "0";
   iframe.style.border = "none";
