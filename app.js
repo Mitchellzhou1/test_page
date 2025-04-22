@@ -54,6 +54,7 @@ document.getElementById("btn3").addEventListener("click", () => {
 document.getElementById("btn4").addEventListener("click", () => {
   const worker = new Worker("regularCalculations.js");
   worker.postMessage(30000);
+  document.getElementById("result4").classList.remove("hidden");
 });
 
 
@@ -83,7 +84,9 @@ document.getElementById('btn5').addEventListener('click', () => {
   // Handle simulation completion
   setTimeout(() => {
     alert("✅ Resource simulation complete.");
-  }, 100000 + 10000);
+  }, 200000 + 10000);
+  document.getElementById("result5").classList.remove("hidden");
+
 });
 
 

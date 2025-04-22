@@ -18,37 +18,46 @@
 
     <h3 class="section-title">Network Based Detection</h3>
     <button id="btn1" class="btn network-btn">Test Mining Script (Webminepool)</button>
-    <button id="btn2" class="btn network-btn">Test WASM Miner (Cryptonight)</button>
-    <button id="btn3" class="btn network-btn">Test Invisible Miner Iframe</button>
-
-    <div class="section-divider"></div>
-    <h3 class="section-title">Resource Based Detection</h3>
-
-    <div class="warning">
-      <p><strong>⚠️ Disclaimer:</strong> This test simulates high CPU usage for <strong>10 seconds</strong>. The <b>intense</b> test may make your browser may become unresponsive or freeze temporarily.</p>
-    </div>
-    
-    <button id="btn4" class="btn resource-btn">Resource Usage Simulator NORMAL</button>
-    <button id="btn5" class="btn black-btn">Resource Usage Simulator  <br>💥INTENSE💥</button>
-    
     <div id="result1" class="result hidden">
       <p>Attempted to load: <code>https://www.webminepool.com/lib/base.js</code></p>
       <p class="status" id="status1"></p>
     </div>
 
+    <button id="btn2" class="btn network-btn">Test WASM Miner (Cryptonight)</button>
     <div id="result2" class="result hidden">
       <p>Attempted to load: <code>https://localhost/cryptonight.wasm</code></p>
       <p class="status" id="status2"></p>
     </div>
 
+    <button id="btn3" class="btn network-btn">Test Invisible Miner Iframe</button>
     <div id="result3" class="result hidden">
       <p>Attempted to open: <code>Invisible Miner Iframe</code></p>
       <p class="status" id="status3">Opening invisible miner iframe...</p>
     </div>
 
-    <div id="result5" class="result hidden">
-      <p class="status" id="status5">Running high CPU load...</p>
+    <div class="section-divider"></div>
+    <h3 class="section-title">Resource Based Detection</h3>
+
+    <div class="warning">
+      <p><strong>⚠️ Disclaimer:</strong> This test simulates high CPU usage for <strong>30 seconds</strong>. The <b>intense</b> test may make your browser may become unresponsive or freeze temporarily.</p>
     </div>
+    
+    <button id="btn4" class="btn resource-btn">Resource Usage Simulator NORMAL</button>
+    <div id="result4" class="result hidden">
+      <p>Attempted to simulate Resouce Usage: <code>NORMAL</code></p>
+      <p class="status" id="status4">Solving for primes in the background...</p>
+    </div>
+    
+    
+    <button id="btn5" class="btn black-btn">Resource Usage Simulator  <br>💥INTENSE💥</button>
+    <div id="result5" class="result hidden">
+      <p>Attempted to simulate Resouce Usage: <code>INTENSE</code></p>
+      <p class="status" id="status4">Stress testing CPU, Network, RAM, GPU, etc...</p>
+
+    </div>
+
+   
+
 
   </div>
 
