@@ -53,39 +53,52 @@ document.getElementById("btn3").addEventListener("click", () => {
 
 
 document.getElementById('btn4').addEventListener('click', () => {
-  const result = document.getElementById('result4');
-  const status = document.getElementById('status4');
-  result.classList.remove('hidden');
-  status.textContent = 'Running full resource attack...';
+  const start = Date.now();
+  const arr = [];
 
-  const endTime = Date.now() + 15000;
-  const memoryHog = [];
-
-  // Simulate full resource attack
-  function burnEverything() {
-    while (Date.now() < endTime) {
-      // CPU: Massive nested loops with pointless math
-      for (let i = 0; i < 5000; i++) {
-        for (let j = 0; j < 5000; j++) {
-          Math.atan2(i, j);
-          Math.pow(i, j % 10);
-        }
-      }
-
-      const bigArray = new Array(1e6).fill(Math.random());
-      memoryHog.push(bigArray);
-
-      for (let k = 0; k < 10; k++) {
-        fetch("crypto_mining_domain.com")
-          .then(() => {})
-          .catch(() => {});
-      }
+  const bloatDOM = () => {
+    for (let i = 0; i < 5000; i++) {
+      const el = document.createElement('div');
+      el.textContent = '🚨'.repeat(100);
+      document.body.appendChild(el);
     }
+  };
 
-    status.textContent = '💀 Test complete. If you’re still alive, congrats.';
-  }
+  const memoryFlood = () => {
+    for (let i = 0; i < 1000; i++) {
+      arr.push(new Array(1e5).fill("crash"));
+    }
+  };
 
-  burnEverything();
+  const canvasAttack = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 10000;
+    canvas.height = 10000;
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    for (let i = 0; i < 1000; i++) {
+      ctx.fillRect(Math.random() * 10000, Math.random() * 10000, 1000, 1000);
+    }
+  };
+
+  const networkSpam = () => {
+    for (let i = 0; i < 200; i++) {
+      fetch("https://httpbin.org/get?x=" + Math.random()).catch(() => {});
+    }
+  };
+
+  const cpuHammer = () => {
+    while (Date.now() - start < 10000) {
+      Math.sqrt(Math.random() * Number.MAX_SAFE_INTEGER);
+      memoryFlood();
+      canvasAttack();
+      networkSpam();
+      bloatDOM();
+    }
+    alert("Crash simulation complete!");
+  };
+
+  setTimeout(cpuHammer, 10);
 });
 
 
