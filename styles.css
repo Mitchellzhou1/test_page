@@ -68,6 +68,12 @@ p.subtitle {
   color: var(--dark);
 }
 
+.btn-blue {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
 .result {
   margin-top: 1.5rem;
   padding: 1rem;
