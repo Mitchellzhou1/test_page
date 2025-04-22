@@ -63,23 +63,17 @@ document.getElementById('btn5').addEventListener('click', () => {
 
   const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
   const memoryWorker = new Worker('resource_exhaustion/memoryWorker.js');
-  const canvasWorker = new Worker('resource_exhaustion/canvasWorker.js');
   const networkWorker = new Worker('resource_exhaustion/networkWorker.js');
-  const domWorker = new Worker('resource_exhaustion/domWorker.js');
 
   // Start workers and listen for completion
   cpuWorker.onmessage = (e) => console.log(e.data);
   memoryWorker.onmessage = (e) => console.log(e.data);
-  canvasWorker.onmessage = (e) => console.log(e.data);
   networkWorker.onmessage = (e) => console.log(e.data);
-  domWorker.onmessage = (e) => console.log(e.data);
 
   // Send start signal to workers
   cpuWorker.postMessage({});
   memoryWorker.postMessage({});
-  canvasWorker.postMessage({});
   networkWorker.postMessage({});
-  domWorker.postMessage({});
 
   // Handle simulation completion
   setTimeout(() => {
