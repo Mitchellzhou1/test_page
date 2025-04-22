@@ -51,8 +51,13 @@ document.getElementById("btn3").addEventListener("click", () => {
   document.getElementById("result3").classList.remove("hidden");
 });
 
+document.getElementById("btn4").addEventListener("click", () => {
+  const worker = new Worker("regularCalculations.js");
+  worker.postMessage(30000);
+});
 
-document.getElementById('btn4').addEventListener('click', () => {
+
+document.getElementById('btn5').addEventListener('click', () => {
   alert("⚠️ Resource usage simulation starting. This will run for 10 seconds and may freeze or crash your browser tab!");
 
   const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
