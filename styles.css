@@ -68,8 +68,14 @@ p.subtitle {
   color: var(--dark);
 }
 
+.btn-warning {
+  background-color: #0f39f7;
+  color: white;
+  border: none;
+}
+
 .btn-blue {
-  background-color: #007bff;
+  background-color: #ffd000;
   color: white;
   border: none;
 }

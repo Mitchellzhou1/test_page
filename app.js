@@ -50,3 +50,23 @@ document.getElementById("btn3").addEventListener("click", () => {
   document.body.appendChild(iframe);
   document.getElementById("result3").classList.remove("hidden");
 });
+
+
+document.getElementById('btn4').addEventListener('click', () => {
+  const result = document.getElementById('result4');
+  const status = document.getElementById('status4');
+  result.classList.remove('hidden');
+  status.textContent = 'Running high CPU load...';
+
+  // Simulate high CPU usage for 5 seconds
+  const endTime = Date.now() + 5000;
+  while (Date.now() < endTime) {
+    // Intentionally waste CPU with meaningless computation
+    Math.sqrt(Math.random() * Number.MAX_SAFE_INTEGER);
+    for (let i = 0; i < 10000; i++) {
+      Math.pow(Math.random(), 10);
+    }
+  }
+
+  status.textContent = 'Test complete. Your browser survived!';
+});
