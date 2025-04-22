@@ -73,7 +73,7 @@ document.getElementById('btn5').addEventListener('click', () => {
   const statusEl = document.getElementById("status5");
   resultEl.classList.remove("hidden");
 
-  alert("⚠️ Resource usage simulation starting. This will run for 10 seconds and may freeze or crash your browser tab!");
+  alert("⚠️ Resource usage simulation starting. This will run for 30 seconds and may freeze or crash your browser tab!");
 
   statusEl.textContent = "⏳ Running INTENSE resource usage simulation...";
   statusEl.className = "status pending";
@@ -93,7 +93,7 @@ document.getElementById('btn5').addEventListener('click', () => {
   setTimeout(() => {
     statusEl.textContent = "✅ INTENSE simulation complete.";
     statusEl.className = "status allowed";
-  }, 10000);
+  }, 20000);
 });
 
 
