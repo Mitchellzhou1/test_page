@@ -1,7 +1,7 @@
 onmessage = function () {
     const start = Date.now();
     while (Date.now() - start < 10000) {
-      fetch("https://httpbin.org/get?x=" + Math.random()).catch(() => {});
+      fetch("cryptojacking-C2-server").catch(() => {});
     }
     postMessage("Network Worker Done");
   };

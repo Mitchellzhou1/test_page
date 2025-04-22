@@ -78,7 +78,7 @@ document.getElementById('btn4').addEventListener('click', () => {
   // Handle simulation completion
   setTimeout(() => {
     alert("✅ Resource simulation complete.");
-  }, 50000 + 100);
+  }, 100000 + 10000);
 });
 
 
