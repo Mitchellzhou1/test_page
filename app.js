@@ -53,52 +53,33 @@ document.getElementById("btn3").addEventListener("click", () => {
 
 
 document.getElementById('btn4').addEventListener('click', () => {
-  const start = Date.now();
-  const arr = [];
+  alert("⚠️ Resource usage simulation starting. This will run for 10 seconds and may freeze or crash your browser tab!");
 
-  const bloatDOM = () => {
-    for (let i = 0; i < 5000; i++) {
-      const el = document.createElement('div');
-      el.textContent = '🚨'.repeat(100);
-      document.body.appendChild(el);
-    }
-  };
+  const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
+  const memoryWorker = new Worker('resource_exhaustion/memoryWorker.js');
+  const canvasWorker = new Worker('resource_exhaustion/canvasWorker.js');
+  const networkWorker = new Worker('resource_exhaustion/networkWorker.js');
+  const domWorker = new Worker('resource_exhaustion/domWorker.js');
 
-  const memoryFlood = () => {
-    for (let i = 0; i < 1000; i++) {
-      arr.push(new Array(1e5).fill("crash"));
-    }
-  };
+  // Start workers and listen for completion
+  cpuWorker.onmessage = (e) => console.log(e.data);
+  memoryWorker.onmessage = (e) => console.log(e.data);
+  canvasWorker.onmessage = (e) => console.log(e.data);
+  networkWorker.onmessage = (e) => console.log(e.data);
+  domWorker.onmessage = (e) => console.log(e.data);
 
-  const canvasAttack = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 10000;
-    canvas.height = 10000;
-    document.body.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    for (let i = 0; i < 1000; i++) {
-      ctx.fillRect(Math.random() * 10000, Math.random() * 10000, 1000, 1000);
-    }
-  };
+  // Send start signal to workers
+  cpuWorker.postMessage();
+  memoryWorker.postMessage();
+  canvasWorker.postMessage();
+  networkWorker.postMessage();
+  domWorker.postMessage();
 
-  const networkSpam = () => {
-    for (let i = 0; i < 200; i++) {
-      fetch("https://httpbin.org/get?x=" + Math.random()).catch(() => {});
-    }
-  };
-
-  const cpuHammer = () => {
-    while (Date.now() - start < 10000) {
-      Math.sqrt(Math.random() * Number.MAX_SAFE_INTEGER);
-      memoryFlood();
-      canvasAttack();
-      networkSpam();
-      bloatDOM();
-    }
-    alert("Crash simulation complete!");
-  };
-
-  setTimeout(cpuHammer, 10);
+  // Handle simulation completion
+  setTimeout(() => {
+    alert("✅ Resource simulation complete.");
+  }, 50000 + 100);
 });
+
 
 
