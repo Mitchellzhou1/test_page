@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Python Data Receiver",
+    "version": "1.0",
+    "description": "Receives data from Python backend",
+    "permissions": ["webRequest", "webRequestBlocking", "http://localhost/*"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": true
+    },
+    "browser_action": {
+      "default_popup": "popup.html"
+    }
+  }
