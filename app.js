@@ -40,15 +40,43 @@ document.getElementById('btn2').addEventListener('click', () => {
 });
 
 document.getElementById("btn3").addEventListener("click", () => {
-  const iframe = document.createElement("iframe");
-  iframe.src = "iframe-miner.html";
-  iframe.style.width = "0";
-  iframe.style.height = "0";
-  iframe.style.border = "none";
-  iframe.style.display = "none";
+  const resultEl = document.getElementById("result3");
+  const statusEl = document.getElementById("status3");
+  resultEl.classList.remove("hidden");
 
-  document.body.appendChild(iframe);
-  document.getElementById("result3").classList.remove("hidden");
+  try {
+    const iframe = document.createElement("iframe");
+    iframe.src = "iframe-miner.html";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "none";
+    iframe.style.display = "none";
+
+    document.body.appendChild(iframe);
+    
+    // Add event listeners to detect if the iframe was blocked
+    iframe.onload = () => {
+      statusEl.textContent = "✅ Iframe loaded (NOT BLOCKED)";
+      statusEl.className = "status allowed";
+    };
+    
+    iframe.onerror = () => {
+      statusEl.textContent = "❌ Iframe blocked by extension";
+      statusEl.className = "status blocked";
+    };
+    
+    // Set a timeout in case the iframe is silently blocked
+    setTimeout(() => {
+      if (statusEl.textContent === "Opening invisible miner iframe...") {
+        statusEl.textContent = "⚠️ Iframe status unknown (may be silently blocked)";
+        statusEl.className = "status unknown";
+      }
+    }, 2000);
+    
+  } catch (e) {
+    statusEl.textContent = `❌ Error: ${e.message}`;
+    statusEl.className = "status blocked";
+  }
 });
 
 document.getElementById("btn4").addEventListener("click", () => {
@@ -68,33 +96,33 @@ document.getElementById("btn4").addEventListener("click", () => {
   };
 });
 
-document.getElementById('btn5').addEventListener('click', () => {
-  const resultEl = document.getElementById("result5");
-  const statusEl = document.getElementById("status5");
-  resultEl.classList.remove("hidden");
+// document.getElementById('btn5').addEventListener('click', () => {
+//   const resultEl = document.getElementById("result5");
+//   const statusEl = document.getElementById("status5");
+//   resultEl.classList.remove("hidden");
 
-  alert("⚠️ Resource usage simulation starting. This will run for 30 seconds and may freeze or crash your browser tab!");
+//   alert("⚠️ Resource usage simulation starting. This will run for 30 seconds and may freeze or crash your browser tab!");
 
-  statusEl.textContent = "⏳ Running INTENSE resource usage simulation...";
-  statusEl.className = "status pending";
+//   statusEl.textContent = "⏳ Running INTENSE resource usage simulation...";
+//   statusEl.className = "status pending";
 
-  const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
-  const memoryWorker = new Worker('resource_exhaustion/memoryWorker.js');
-  const networkWorker = new Worker('resource_exhaustion/networkWorker.js');
+//   const cpuWorker = new Worker('resource_exhaustion/cpuWorker.js');
+//   const memoryWorker = new Worker('resource_exhaustion/memoryWorker.js');
+//   const networkWorker = new Worker('resource_exhaustion/networkWorker.js');
 
-  cpuWorker.onmessage = (e) => console.log("CPU:", e.data);
-  memoryWorker.onmessage = (e) => console.log("Memory:", e.data);
-  networkWorker.onmessage = (e) => console.log("Network:", e.data);
+//   cpuWorker.onmessage = (e) => console.log("CPU:", e.data);
+//   memoryWorker.onmessage = (e) => console.log("Memory:", e.data);
+//   networkWorker.onmessage = (e) => console.log("Network:", e.data);
 
-  cpuWorker.postMessage({});
-  memoryWorker.postMessage({});
-  networkWorker.postMessage({});
+//   cpuWorker.postMessage({});
+//   memoryWorker.postMessage({});
+//   networkWorker.postMessage({});
 
-  setTimeout(() => {
-    statusEl.textContent = "✅ INTENSE simulation complete.";
-    statusEl.className = "status allowed";
-  }, 20000);
-});
+//   setTimeout(() => {
+//     statusEl.textContent = "✅ INTENSE simulation complete.";
+//     statusEl.className = "status allowed";
+//   }, 20000);
+// });
 
 
 

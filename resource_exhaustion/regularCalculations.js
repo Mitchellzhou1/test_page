@@ -10,12 +10,14 @@ function isPrime(num) {
 }
 
 self.onmessage = function (e) {
-    const duration = e.data;
+    const duration = e.data; // in ms
     const start = Date.now();
     let current = 2;
 
     while (Date.now() - start < duration) {
-        isPrime(current);
+        if (isPrime(current)) {
+            console.log("Sending Primes to server: " + current)
+        }
         current++;
     }
 

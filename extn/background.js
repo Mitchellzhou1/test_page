@@ -13,7 +13,6 @@ function connectWebSocket() {
     latestNumber = event.data;
     console.log(`[background.js] Received number: ${latestNumber}`);
     
-    // Send to popup if it's open
     if (popupPort) {
       popupPort.postMessage({number: latestNumber});
     }
@@ -30,15 +29,12 @@ function connectWebSocket() {
   };
 }
 
-// Connect when extension starts
 connectWebSocket();
 
-// Handle popup connection
 chrome.runtime.onConnect.addListener(function(port) {
   console.assert(port.name === "popup");
   popupPort = port;
   
-  // Send current number immediately when popup connects
   port.postMessage({number: latestNumber});
   
   port.onDisconnect.addListener(function() {
