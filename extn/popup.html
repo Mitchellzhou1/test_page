@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Python Data Receiver</title>
-  <style>
-    body {
-      width: 200px;
-      padding: 10px;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    #numberDisplay {
-      font-size: 24px;
-      margin: 10px 0;
-      font-weight: bold;
-    }
-  </style>
+  <title>CPU Monitor</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h3>Random Number from Python</h3>
-  <div id="numberDisplay">Connecting...</div>
-  
+  <div class="container">
+    <h1>CPU Usage</h1>
+    <div class="cpu-display">
+      <div class="cpu-bar">
+        <div class="cpu-bar-fill" id="cpuBar"></div>
+      </div>
+      <span class="cpu-percent" id="cpuPercent">0%</span>
+    </div>
+    <div class="cpu-info" id="cpuInfo">Loading...</div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

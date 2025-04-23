@@ -1,8 +1,8 @@
 :root {
   --network-blue: #3498db;
   --network-blue-hover: #2980b9;
-  --resource-red: #e74c3c;
-  --resource-red-hover: #c0392b;
+  --resource-red: #970f00;
+  --resource-red-hover: #6e0b00;
   --dark: #2d3436;
   --light: #f5f6fa;
   --success: #2ecc71;
@@ -126,7 +126,7 @@ p.subtitle {
 }
 
 .warning {
-  background-color: #fcf3d5;
+  background-color: #fff4cf;
   padding: 1rem;
   border-radius: 8px;
   margin: 1rem 0;

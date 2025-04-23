@@ -1,43 +1,30 @@
-let socket = null;
-let latestNumber = "Waiting for data...";
-let popupPort = null;
+let lastUsage = null;
 
-function connectWebSocket() {
-  socket = new WebSocket("ws://localhost:8765");
+function calculateUsageDelta(prev, curr) {
+  return curr.map((core, i) => {
+    const prevCore = prev[i];
+    const activePrev = prevCore.usage.user + prevCore.usage.kernel;
+    const activeCurr = core.usage.user + core.usage.kernel;
+    const totalPrev = prevCore.usage.total;
+    const totalCurr = core.usage.total;
 
-  socket.onopen = function(e) {
-    console.log("[background.js] WebSocket connection established");
-  };
+    const activeDelta = activeCurr - activePrev;
+    const totalDelta = totalCurr - totalPrev;
 
-  socket.onmessage = function(event) {
-    latestNumber = event.data;
-    console.log(`[background.js] Received number: ${latestNumber}`);
-    
-    if (popupPort) {
-      popupPort.postMessage({number: latestNumber});
-    }
-  };
-
-  socket.onclose = function(event) {
-    console.log("[background.js] WebSocket connection closed, reconnecting...");
-    setTimeout(connectWebSocket, 1000);
-  };
-
-  socket.onerror = function(error) {
-    console.error("[background.js] WebSocket error:", error);
-    socket.close();
-  };
+    return totalDelta === 0 ? 0 : (activeDelta / totalDelta) * 100;
+  });
 }
 
-connectWebSocket();
-
-chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name === "popup");
-  popupPort = port;
-  
-  port.postMessage({number: latestNumber});
-  
-  port.onDisconnect.addListener(function() {
-    popupPort = null;
+function sampleCpuUsage() {
+  chrome.system.cpu.getInfo(current => {
+    if (lastUsage) {
+      const usagePercents = calculateUsageDelta(lastUsage.processors, current.processors);
+      const avgUsage = usagePercents.reduce((a, b) => a + b, 0) / usagePercents.length;
+      const time = new Date().toLocaleTimeString();
+      console.log(`[${time}] CPU Usage: ${avgUsage.toFixed(2)}%`);
+    }
+    lastUsage = current;
   });
-});
+}
+
+setInterval(sampleCpuUsage, 5000); // every 5 seconds

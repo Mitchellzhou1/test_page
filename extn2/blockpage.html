@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Blocked</title></head>
+  <body>
+    <h1>⚠️ This URL has been blocked!</h1>
+    <script>
+      const params = new URLSearchParams(location.search);
+      document.body.innerHTML += `
+        <p><strong>URL:</strong> ${params.get('u')}</p>
+        <p><strong>Pattern:</strong> ${params.get('r')}</p>
+        <p><strong>Origin:</strong> ${params.get('origin')}</p>
+      `;
+    </script>
+  </body>
+</html>
